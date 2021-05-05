@@ -178,6 +178,6 @@ public class SnakeGame implements ActionListener, KeyListener {
          */
 
         
-
+        panel.repaint();
     }
 }

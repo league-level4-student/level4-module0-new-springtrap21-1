@@ -92,7 +92,7 @@ class Car {
 
     public void setFuelInTank(double fuelInTank) {
 
-        if (fuelInTank > 0 && fuelInTank <= tankCapacity) {
+        if (fuelInTank >= 0 && fuelInTank <= tankCapacity) {
 
             this.fuelInTank = fuelInTank;
 
