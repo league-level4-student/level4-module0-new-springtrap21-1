@@ -34,11 +34,11 @@ public class Snake {
         /*
          * Use a switch statement to check on the currentDirection of the snake
          * and calculate the head's next x and y position. Depending on the
-         * direction, x or y will increase or decrease by 1.
+         * direction, the head's x or y will increase or decrease by 1.
          */
 
-        int nextX = 0;
-        int nextY = 0;
+        int nextX;
+        int nextY;
 
         
         /*
