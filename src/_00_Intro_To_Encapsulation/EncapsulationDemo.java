@@ -128,7 +128,7 @@ class Car {
     protected void drive() {
 
         if (fuelInTank()) {
-            System.out.println("I'm driving my " + color + "car...");
+            System.out.println("I'm driving my " + color + " car...");
             setFuelInTank(fuelInTank - 1);
         } else {
             System.out.println("I'm out of gas.");
