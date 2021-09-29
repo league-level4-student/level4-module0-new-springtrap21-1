@@ -66,7 +66,7 @@ class Car {
     public Car(double tankCapacity, double fuelInTank, String color, int mpg) {
 
         this.tankCapacity = tankCapacity;
-        this.fuelInTank = fuelInTank;
+        setFuelInTank(fuelInTank);
         this.color = color;
         this.mpg = mpg;
 
