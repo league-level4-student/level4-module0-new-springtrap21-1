@@ -61,9 +61,10 @@ class Car {
      * accessed by subclasses outside the current package.
      */
 
-    int mpg;
+    double mpg;
 
-    public Car(double tankCapacity, double fuelInTank, String color, int mpg) {
+    public Car(double tankCapacity, double fuelInTank, String color, 
+               double mpg) {
 
         this.tankCapacity = tankCapacity;
         setFuelInTank(fuelInTank);
