@@ -142,7 +142,7 @@ class SUV extends Car {
 
     private int numSeats;
 
-    public SUV(double tankCapacity, double fuelInTank, String color, int mpg,
+    public SUV(double tankCapacity, double fuelInTank, String color, double mpg,
             int numSeats) {
 
         super(tankCapacity, fuelInTank, color, numSeats);
