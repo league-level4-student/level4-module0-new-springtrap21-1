@@ -56,9 +56,9 @@ class Car {
     protected String color;
 
     /*
-     * If you put no access modifier(also called default) The method or variable
-     * will have accessibility similar to protected, but cannot be accessed by
-     * subclasses outside the current package.
+     * If you put no access modifier(also called package-private) The method or 
+     * variable will have accessibility similar to protected, but cannot be 
+     * accessed by subclasses outside the current package.
      */
 
     int mpg;
