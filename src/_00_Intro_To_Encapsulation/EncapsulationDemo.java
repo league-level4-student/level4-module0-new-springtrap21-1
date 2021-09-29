@@ -120,7 +120,7 @@ class Car {
 
     }
 
-    public double gettankCapacity() {
+    public double getTankCapacity() {
 
         return tankCapacity;
     }
