@@ -39,7 +39,7 @@ class Car {
      * class.
      * 
      * This is the preferred default for most member variables as well as helper
-     * methods* that assist the class in performing tasks, but have no outside
+     * methods that assist the class in performing tasks, but have no outside
      * utility.
      */
 
