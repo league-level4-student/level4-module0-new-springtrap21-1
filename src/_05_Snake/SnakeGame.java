@@ -121,7 +121,7 @@ public class SnakeGame implements ActionListener, KeyListener {
          * Set the foodLocation member variable equal to the Location object you
          * just created.
          * 
-         * Use the Snake class's isLocationOnSnake method to make sure you don't
+         * Use the snake's isLocationOnSnake method to make sure you don't
          * put the food on top of the snake.
          */
 
@@ -143,7 +143,7 @@ public class SnakeGame implements ActionListener, KeyListener {
         
 
         /*
-         * If the user wants to play again, call the Snake class's resetLocation
+         * If the user wants to play again, call the snake's resetLocation
          * method and this class's setFoodLocation method then restart the
          * timer. Otherwise, exit the game.
          */
@@ -159,7 +159,7 @@ public class SnakeGame implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        // Call the Snake class's update method.
+        // Call the snake's update method.
 
 
 

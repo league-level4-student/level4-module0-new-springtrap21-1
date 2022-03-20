@@ -3,7 +3,7 @@ package _01_Encapsulate_the_Data;
 public class EncapsulateTheData {
 
     /*
-     * itemsReceived cannot negative. All negative parameters should set
+     * itemsReceived cannot be negative. All negative parameters should set
      * itemsReceived to 0.
      */
 

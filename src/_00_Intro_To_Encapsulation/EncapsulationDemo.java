@@ -145,7 +145,7 @@ class SUV extends Car {
     public SUV(double tankCapacity, double fuelInTank, String color, double mpg,
             int numSeats) {
 
-        super(tankCapacity, fuelInTank, color, numSeats);
+        super(tankCapacity, fuelInTank, color, mpg);
 
         this.numSeats = numSeats;
 
