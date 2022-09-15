@@ -153,10 +153,8 @@ public class EncapsulateTheDataTest {
             while (line != null) {
 
                 if (line.contains(memberVariableName) && !line.contains("*")) {
-                    encapsulated = line.contains("private")
-                            || line.contains("protected");
+                    encapsulated = line.contains("private") || line.contains("protected");
                     break;
-
                 }
 
                 line = br.readLine();

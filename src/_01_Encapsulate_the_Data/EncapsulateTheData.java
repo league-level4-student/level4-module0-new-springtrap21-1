@@ -2,33 +2,52 @@ package _01_Encapsulate_the_Data;
 
 public class EncapsulateTheData {
 
-    /*
-     * itemsReceived cannot be negative. All negative parameters should set
-     * itemsReceived to 0.
-     */
+	// 1. Encapsulate all the members.
 
-    int itemsReceived;
+	// 2. Implement the setter restrictions described above each member variable.
 
-    /*
-     * degreesTurned must be locked between 0.0 and 360.0 inclusive. All
-     * parameters outside this range should set degreesTurned to the nearest
-     * bound.
-     */
+	// 3. Pass all the JUnit tests.
 
-    double degreesTurned;
+	/* 
+	 * All negative arguments should set itemsReceived to 0.
+	 */
 
-    /*
-     * nomenclature must not contain an empty String. An empty String parameter
-     * should set nomenclature to a String with a single space.
-     */
+	int itemsReceived;
 
-    String nomenclature;
+	/*
+	 * degreesTurned must be locked between 0.0 and 360.0 inclusive.
+	 * 
+	 * All parameters outside this range should set degreesTurned to the nearest
+	 * bound.
+	 */
 
-    /*
-     * memberObj must not be a String. A String parameter should set memberObj
-     * to a new Object(); Hint: Use the instanceof operator.
-     */
+	double degreesTurned;
 
-    Object memberObj;
+	/*
+	 * nomenclature must not contain an empty String.
+	 * 
+	 * An empty String parameter should set nomenclature to a String with a single
+	 * space.
+	 */
+
+	String nomenclature;
+
+	/*
+	 * memberObj must not be a String.
+	 * 
+	 * A String parameter should set memberObj to a new Object();
+	 * 
+	 * Hint: Use the instanceof operator.
+	 * 
+	 * Example:
+	 * 
+	 * Robot rob = new Robot();
+	 * 
+	 * System.out.println(rob instanceof Robot); // prints true
+	 * 
+	 * System.out.println(rob instanceof Random); //prints false
+	 */
+
+	Object memberObj;
 
 }
