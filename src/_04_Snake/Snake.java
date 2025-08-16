@@ -37,13 +37,29 @@ public class Snake {
 		 * Create variables for the next X and Y location of the snake's head.
 		 * Initialize them to the current X and Y locations.
 		 */
-
+		int currentX = 0;
+		int currentY = 0;
+		int nextX = currentX;
+		int nextY = currentY;
 		/*
 		 * Use a switch statement to check on the currentDirection of the snake and
 		 * calculate the head's next x and y position. Depending on the direction, the
 		 * variables you created may increase or decrease by 1.
 		 */
-
+		switch(currentDirection) {
+		case UP:
+			nextY = nextY+1;
+			break;
+		case DOWN:
+			nextY = nextY-1;
+			break;
+		case LEFT:
+			nextX = nextX-1;
+			break;
+		case RIGHT:
+			nextX = nextX+1;
+			break;
+		}
 		/*
 		 * Change the Location of each SnakeSegment in your snake ArrayList to the
 		 * Location of the segment in front of it.
