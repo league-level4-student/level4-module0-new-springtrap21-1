@@ -63,7 +63,7 @@ public class Snake {
 		/*
 		 * Change the Location of each SnakeSegment in your snake ArrayList to the
 		 * Location of the segment in front of it.
-		 * 
+		 
 		 * Use a loop starting at the end of the ArrayList and stop before the head of
 		 * the snake (index 0) or you will go out of bounds.
 		 */
@@ -74,11 +74,28 @@ public class Snake {
 		 */
 
 		// Set the canMove member variable to true.
-
+		Location newLoc = null;
+		SnakeSegment previousSegment;
+		for(int i = snake.size()-1; i > -1; i--) {
+			if (i == 0) {
+				//change head to new location
+				head.setLocation(newLoc);
+			}
+			else {
+				//save segment in front
+				 previousSegment = snake.get(i-1);
+				//switch locations
+				snake.set(i, previousSegment);
+			}
+		}
 	}
 
 	public void setDirection(Direction direction) {
-
+		
+		if (isNotOppositeDirection(direction) && canMove) {
+			currentDirection = direction;
+			canMove = false;
+		}
 		/*
 		 * If the passed in direction is not the opposite direction of currentDirection
 		 * and canMove is true, set currentDirection to the passed in direction and
@@ -86,11 +103,10 @@ public class Snake {
 		 * 
 		 * Hint: Use the isNotOppositeDirection method.
 		 */
-
 	}
 
 	private boolean isNotOppositeDirection(Direction direction) {
-
+		
 		/*
 		 * Complete the method so it returns true if the passed in direction is not the
 		 * opposite direction of currentDirection.
@@ -98,8 +114,9 @@ public class Snake {
 		 * For example, if currentDirection is UP and the passed in direction is DOWN
 		 * this method should return false.
 		 */
+		return false;
 
-		return true;
+		
 	}
 
 	public void resetLocation() {
