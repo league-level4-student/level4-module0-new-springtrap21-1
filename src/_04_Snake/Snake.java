@@ -106,7 +106,18 @@ public class Snake {
 	}
 
 	private boolean isNotOppositeDirection(Direction direction) {
-		
+		switch(currentDirection) {
+		case UP:
+			return direction != Direction.DOWN;
+		case DOWN:
+			return direction != Direction.UP;
+		case RIGHT:
+			return direction != Direction.LEFT;
+		case LEFT:
+			return direction != Direction.RIGHT;
+		default:
+			return true;
+		}
 		/*
 		 * Complete the method so it returns true if the passed in direction is not the
 		 * opposite direction of currentDirection.
@@ -114,13 +125,13 @@ public class Snake {
 		 * For example, if currentDirection is UP and the passed in direction is DOWN
 		 * this method should return false.
 		 */
-		return false;
-
-		
 	}
 
 	public void resetLocation() {
-
+		snake.clear();
+		Location start = new Location(SnakeGame.WIDTH/2, SnakeGame.HEIGHT/2);
+		head = new SnakeSegment(start, BODY_SIZE);
+		snake.add(head);
 		// Clear the snake.
 
 		/*
