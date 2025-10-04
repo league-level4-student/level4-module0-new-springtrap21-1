@@ -128,34 +128,40 @@ public class Snake {
 	}
 
 	public void resetLocation() {
-		snake.clear();
-		Location start = new Location(SnakeGame.WIDTH/2, SnakeGame.HEIGHT/2);
-		head = new SnakeSegment(start, BODY_SIZE);
-		snake.add(head);
+		
 		// Clear the snake.
-
+		snake.clear();
 		/*
 		 * Create a new Location object for the head at SnakeGame.WIDTH / 2,
 		 * SnakeGame.HEIGHT / 2.
 		 */
-
+		Location start = new Location(SnakeGame.WIDTH/2, SnakeGame.HEIGHT/2);
 		/*
 		 * Set the head member variable equal to a new SnakeSegment object. Use the
 		 * Location created in step 2 for the Location and the BODY_SIZE constant for
 		 * the size.
 		 */
-
+		head = new SnakeSegment(start, BODY_SIZE);
 		// Add the head to the snake.
-
+		snake.add(head);
+		
+		
+		
 	}
 
 	public boolean isOutOfBounds() {
-
 		/*
 		 * Complete the method so it returns true if the head of the snake is outside of
 		 * the window and false otherwise.
 		 */
-
+		int headX = head.getLocation().getX();
+		int headY = head.getLocation().getY();
+		if (headX < 0 &&  headX >= SnakeGame.WINDOW_WIDTH) {
+			return true;
+		}
+		if (headY < 0 &&  headY >= SnakeGame.WINDOW_HEIGHT) {
+			return true;
+		}
 		return false;
 	}
 
@@ -165,7 +171,11 @@ public class Snake {
 		 * Complete the method so it returns true if the head is located in the same
 		 * location as any other body segment.
 		 */
-
+		for (int i = 1; i < snake.size(); i++) {
+			if (snake.get(i).getLocation().equals(getHeadLocation())) {
+				return true;
+			}
+		}
 		return false;
 	}
 
