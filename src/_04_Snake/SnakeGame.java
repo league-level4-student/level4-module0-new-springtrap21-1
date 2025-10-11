@@ -116,7 +116,22 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * 
 		 * Hint: KeyEvent.VK_UP.
 		 */
-
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_UP:
+			snake.setDirection(Direction.UP);
+			break;
+		case KeyEvent.VK_DOWN:
+			snake.setDirection(Direction.DOWN);
+			break;
+		case KeyEvent.VK_LEFT:
+			snake.setDirection(Direction.LEFT);
+			break;
+		case KeyEvent.VK_RIGHT:
+			snake.setDirection(Direction.RIGHT);
+			break;
+		default:
+			break;
+		}
 	}
 
 	private void randomizeFoodLocation() {
