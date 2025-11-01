@@ -48,11 +48,11 @@ public class SnakeGame implements ActionListener, KeyListener {
 
 	public SnakeGame() {
 		snake = new Snake(new Location(WIDTH / 2, HEIGHT / 2));
-
+		randomizeFoodLocation();
 		window = new JFrame("Snake");
 		panel = new JPanel() {
 			private static final long serialVersionUID = 1L;
-
+			
 			@Override
 			public void paintComponent(Graphics g) {
 				Graphics2D g2 = (Graphics2D) g;
@@ -77,7 +77,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 
-		randomizeFoodLocation();
+		
 
 		startGame();
 	}
@@ -89,9 +89,9 @@ public class SnakeGame implements ActionListener, KeyListener {
 		JOptionPane.showMessageDialog(null, instructions);
 
 		// Note: Adjust delay here if you want snake to go slower or faster.
-
+		snake.resetLocation();
+		randomizeFoodLocation();
 		timer.setDelay(250);
-
 		timer.start();
 	}
 
@@ -147,40 +147,51 @@ public class SnakeGame implements ActionListener, KeyListener {
 
 		/*
 		 * Set the foodLocation equal to the Location object you just created.
-		 * 
+		 *
 		 * Hint: Use the snake's isLocationOnSnake method to make sure you don't put the
 		 * food on top of the snake.
 		 */
-		
+		if (!snake.isLocationOnSnake(newLocation)) {
+			foodLocation = newLocation;
+		}
 	}
 
 	private void gameOver() {
 
 		// Stop the timer.
-
+		timer.stop();
 		// Tell the user their snake is dead.
-
+		JOptionPane.showMessageDialog(panel, "Your snake is dead!");
 		// Ask the user if they want to play again.
-
+		int answer = JOptionPane.showConfirmDialog(panel, "Do you want to play again?");
 
 		/*
 		 * If the user wants to play again, call the snake's resetLocation method and
 		 * this class's randomizeFoodLocation method then restart the timer. Otherwise,
 		 * exit the game.
 		 */
-
+		if (answer == 0) {
+			timer.restart();
+			startGame();
+		}
+		else {
+			JOptionPane.showMessageDialog(panel, "TBD exit the game");
+			System.exit(0);
+		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		// Call the snake's update method.
-
+		snake.update();
 		/*
 		 * If the snake's head is colliding with its own body or out of bounds call the
 		 * gameOver method.
 		 */
-
+		if (snake.isHeadCollidingWithBody()||snake.isOutOfBounds()) {
+			gameOver();
+		}
 
 		/*
 		 * If the location of the snake's head is equal to the location of the food,
