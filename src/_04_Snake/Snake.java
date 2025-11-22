@@ -37,8 +37,8 @@ public class Snake {
 		 * Create variables for the next X and Y location of the snake's head.
 		 * Initialize them to the current X and Y locations.
 		 */
-		int currentX = 0;
-		int currentY = 0;
+		int currentX = head.getLocation().getX();
+		int currentY = head.getLocation().getY();
 		int nextX = currentX;
 		int nextY = currentY;
 		/*
@@ -48,10 +48,10 @@ public class Snake {
 		 */
 		switch (currentDirection) {
 		case UP:
-			nextY = nextY + 1;
+			nextY = nextY - 1;
 			break;
 		case DOWN:
-			nextY = nextY - 1;
+			nextY = nextY + 1;
 			break;
 		case LEFT:
 			nextX = nextX - 1;
@@ -61,32 +61,24 @@ public class Snake {
 			break;
 		}
 		/*
-		 * Change the Location of each SnakeSegment in your snake ArrayList to the
+		 * NEEDS WORK Change the Location of each SnakeSegment in your snake ArrayList to the
 		 * Location of the segment in front of it.
 		 * 
 		 * Use a loop starting at the end of the ArrayList and stop before the head of
 		 * the snake (index 0) or you will go out of bounds.
 		 */
-
+		for (int i = snake.size() - 1; i > 0; i--) {
+			//snake segment and setting it to the segment in front(i-1 because backwards)
+			snake.set(i, snake.get(i - 1));
+		}
 		/*
 		 * Create a new Location object and initialize it with the values calculated in
 		 * the first step. Then set the head's location equal to the new location.
 		 */
-
+		Location newLocation = new Location(nextX, nextY);
+		head.setLocation(newLocation);
 		// Set the canMove member variable to true.
-		Location newLoc = null;
-		SnakeSegment previousSegment;
-		for (int i = snake.size() - 1; i > -1; i--) {
-			if (i == 0) {
-				// change head to new location
-				head.setLocation(newLoc);
-			} else {
-				// save segment in front
-				previousSegment = snake.get(i - 1);
-				// switch locations
-				snake.set(i, previousSegment);
-			}
-		}
+		canMove = true;
 	}
 
 	public void setDirection(Direction direction) {
