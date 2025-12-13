@@ -52,7 +52,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		window = new JFrame("Snake");
 		panel = new JPanel() {
 			private static final long serialVersionUID = 1L;
-			
+
 			@Override
 			public void paintComponent(Graphics g) {
 				Graphics2D g2 = (Graphics2D) g;
@@ -77,8 +77,6 @@ public class SnakeGame implements ActionListener, KeyListener {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 
-		
-
 		startGame();
 	}
 
@@ -90,7 +88,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 
 		// Note: Adjust delay here if you want snake to go slower or faster.
 		snake.resetLocation();
-		randomizeFoodLocation();
+//		randomizeFoodLocation();
 		timer.setDelay(250);
 		timer.start();
 	}
@@ -135,7 +133,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 	}
 
 	private void randomizeFoodLocation() {
-		
+
 		/*
 		 * Create a new Location object that is set to a random x and y values between 0
 		 * and the WIDTH and HEIGHT variables respectively.
@@ -154,6 +152,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		if (!snake.isLocationOnSnake(newLocation)) {
 			foodLocation = newLocation;
 		}
+		System.out.println(foodLocation.getX() + " + " + foodLocation.getY());
 	}
 
 	private void gameOver() {
@@ -173,8 +172,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		if (answer == 0) {
 			timer.restart();
 			startGame();
-		}
-		else {
+		} else {
 			JOptionPane.showMessageDialog(panel, "TBD exit the game");
 			System.exit(0);
 		}
@@ -189,7 +187,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * If the snake's head is colliding with its own body or out of bounds call the
 		 * gameOver method.
 		 */
-		if (snake.isHeadCollidingWithBody()||snake.isOutOfBounds()) {
+		if (snake.isHeadCollidingWithBody() || snake.isOutOfBounds()) {
 			gameOver();
 		}
 
@@ -197,7 +195,13 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * If the location of the snake's head is equal to the location of the food,
 		 * feed the snake and randomize the food location.
 		 */
-
+		Location headLocation = snake.getHeadLocation();
+		System.out.println("head Location X = " + headLocation.getX() + "head Location Y = " + headLocation.getY());
+		if (headLocation.getX() == foodLocation.getX() && headLocation.getY() == foodLocation.getY()) {
+			System.out.println("got food");
+			snake.feed();
+			randomizeFoodLocation();
+		}
 		panel.repaint();
 	}
 }

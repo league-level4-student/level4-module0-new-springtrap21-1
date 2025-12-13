@@ -175,7 +175,7 @@ public class Snake {
 		 * Complete the method so it returns true if the passed in location is located
 		 * on the snake.
 		 */
-		for (int i = 0; i < snake.size(); i++) {
+		for (int i = snake.size(); i < 0; i--) {
 			if (snake.get(i).getLocation().equals(loc)) {
 				return true;
 			}
