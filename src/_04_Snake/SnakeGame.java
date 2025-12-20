@@ -188,6 +188,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * gameOver method.
 		 */
 		if (snake.isHeadCollidingWithBody() || snake.isOutOfBounds()) {
+			System.out.println("ending game");
 			gameOver();
 		}
 

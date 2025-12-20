@@ -24,7 +24,11 @@ public class Snake {
 	}
 
 	public void feed() {
-		snake.add(new SnakeSegment(snake.get(0).getLocation(), BODY_SIZE));
+		SnakeSegment currentTailSegment = snake.get(snake.size()-1);
+		Location currentTailSegmentLoc = currentTailSegment.getLocation();
+		Location newTailLoc = new Location(currentTailSegmentLoc.getX()+1, currentTailSegmentLoc.getY()-1);
+		SnakeSegment newTailSegment = new SnakeSegment(newTailLoc, BODY_SIZE);
+		snake.add(newTailSegment);
 	}
 
 	public Location getHeadLocation() {
@@ -147,9 +151,11 @@ public class Snake {
 		int headX = head.getLocation().getX();
 		int headY = head.getLocation().getY();
 		if (headX < 0 && headX >= SnakeGame.WINDOW_WIDTH) {
+			System.out.println("headX " + headX + " is out of bounds");
 			return true;
 		}
 		if (headY < 0 && headY >= SnakeGame.WINDOW_HEIGHT) {
+			System.out.println("headY " + headY + " is out of bounds");
 			return true;
 		}
 		return false;
@@ -161,8 +167,13 @@ public class Snake {
 		 * Complete the method so it returns true if the head is located in the same
 		 * location as any other body segment.
 		 */
-		for (int i = 1; i < snake.size(); i++) {
-			if (snake.get(i).getLocation().equals(getHeadLocation())) {
+		for (int i = 0; i > snake.size(); i++) {
+			int segmentX = snake.get(i).getLocation().getX();
+			int headX = getHeadLocation().getX();
+			int segmentY = snake.get(i).getLocation().getY();
+			int headY = getHeadLocation().getY();
+			if (segmentX == headX && segmentY == headY) {
+				System.out.println("segX " + segmentX + "segY " + segmentY + "headX " + headX + "headY " + headY);
 				return true;
 			}
 		}
