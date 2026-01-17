@@ -24,11 +24,25 @@ public class Snake {
 	}
 
 	public void feed() {
+		//For next time: Segment 0 and 1 initially are different locations, but then after are the same x and y
+		System.out.println("feed");
 		SnakeSegment currentTailSegment = snake.get(snake.size()-1);
 		Location currentTailSegmentLoc = currentTailSegment.getLocation();
-		Location newTailLoc = new Location(currentTailSegmentLoc.getX()+1, currentTailSegmentLoc.getY()-1);
+		Location newTailLoc = null;
+		if (currentDirection == Direction.RIGHT) {
+			newTailLoc = new Location(currentTailSegmentLoc.getX()-1, currentTailSegmentLoc.getY());	
+		} else if (currentDirection == Direction.LEFT) {
+			newTailLoc = new Location(currentTailSegmentLoc.getX()+1, currentTailSegmentLoc.getY());	
+		} else if (currentDirection == Direction.UP) {
+			newTailLoc = new Location(currentTailSegmentLoc.getX(), currentTailSegmentLoc.getY()-1);	
+		} else if (currentDirection == Direction.DOWN) {
+			newTailLoc = new Location(currentTailSegmentLoc.getX(), currentTailSegmentLoc.getY()+1);	
+		}
+		System.out.println("head " + head.getLocation().getX() + "," + head.getLocation().getY());
+		System.out.println("tail " + newTailLoc.getX() + "," +  newTailLoc.getY());
 		SnakeSegment newTailSegment = new SnakeSegment(newTailLoc, BODY_SIZE);
 		snake.add(newTailSegment);
+		System.out.println("snakeSize " + snake.size());
 	}
 
 	public Location getHeadLocation() {
@@ -65,15 +79,19 @@ public class Snake {
 			break;
 		}
 		/*
-		 * NEEDS WORK Change the Location of each SnakeSegment in your snake ArrayList to the
+		 * Change the Location of each SnakeSegment in your snake ArrayList to the
 		 * Location of the segment in front of it.
 		 * 
 		 * Use a loop starting at the end of the ArrayList and stop before the head of
 		 * the snake (index 0) or you will go out of bounds.
 		 */
-		for (int i = snake.size() - 1; i > 0; i--) {
-			//snake segment and setting it to the segment in front(i-1 because backwards)
-			snake.set(i, snake.get(i - 1));
+		for (int i = snake.size() -1; i > 0; i--) {
+			SnakeSegment curSnakeSegment = snake.get(i);
+			SnakeSegment prevSnakeSegment = snake.get(i-1);
+			Location prevLocation = prevSnakeSegment.getLocation();
+			Location curLocation = curSnakeSegment.getLocation();
+			curLocation.setX(prevLocation.getX());
+			curLocation.setY(prevLocation.getY());
 		}
 		/*
 		 * Create a new Location object and initialize it with the values calculated in
@@ -195,7 +213,9 @@ public class Snake {
 	}
 
 	public void draw(Graphics g) {
-		for (SnakeSegment s : snake) {
+		for (int i = 0; i < snake.size(); i++) {
+			SnakeSegment s = snake.get(i);
+			System.out.println("segment number: " + i + ", X = " + s.getLocation().getX() + " Y = " + s.getLocation().getY());
 			s.draw(g);
 		}
 	}

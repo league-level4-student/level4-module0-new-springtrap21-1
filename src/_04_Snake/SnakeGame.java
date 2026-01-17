@@ -117,6 +117,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
 			snake.setDirection(Direction.UP);
+			System.out.println();
 			break;
 		case KeyEvent.VK_DOWN:
 			snake.setDirection(Direction.DOWN);
@@ -152,7 +153,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		if (!snake.isLocationOnSnake(newLocation)) {
 			foodLocation = newLocation;
 		}
-		System.out.println(foodLocation.getX() + " + " + foodLocation.getY());
+		//System.out.println(foodLocation.getX() + " + " + foodLocation.getY());
 	}
 
 	private void gameOver() {
@@ -188,7 +189,7 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * gameOver method.
 		 */
 		if (snake.isHeadCollidingWithBody() || snake.isOutOfBounds()) {
-			System.out.println("ending game");
+			//System.out.println("ending game");
 			gameOver();
 		}
 
@@ -197,9 +198,9 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * feed the snake and randomize the food location.
 		 */
 		Location headLocation = snake.getHeadLocation();
-		System.out.println("head Location X = " + headLocation.getX() + "head Location Y = " + headLocation.getY());
+		//System.out.println("head Location X = " + headLocation.getX() + "head Location Y = " + headLocation.getY());
 		if (headLocation.getX() == foodLocation.getX() && headLocation.getY() == foodLocation.getY()) {
-			System.out.println("got food");
+			//System.out.println("got food");
 			snake.feed();
 			randomizeFoodLocation();
 		}
