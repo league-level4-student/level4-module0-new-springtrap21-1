@@ -51,27 +51,25 @@ public class SnakeGame implements ActionListener, KeyListener {
 		randomizeFoodLocation();
 		window = new JFrame("Snake");
 		panel = new JPanel() {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void paintComponent(Graphics g) {
-				Graphics2D g2 = (Graphics2D) g;
-
-				g2.setColor(BACKGROUND_COLOR);
-				g2.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-
-				g2.setColor(FOOD_COLOR);
-				g2.drawOval(foodLocation.getX() * WINDOW_SCALE, foodLocation.getY() * WINDOW_SCALE, Snake.BODY_SIZE,
-						Snake.BODY_SIZE);
-				snake.draw(g);
+		private static final long serialVersionUID = 1L;
+		
+		@Override
+		public void paintComponent(Graphics g) {
+			Graphics2D g2 = (Graphics2D) g;
+			g2.setColor(BACKGROUND_COLOR);
+			g2.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+			g2.setColor(FOOD_COLOR);
+			int x = foodLocation.getX() * WINDOW_SCALE;
+			int y = foodLocation.getY() * WINDOW_SCALE;
+			g2.drawOval(x, y, Snake.BODY_SIZE,Snake.BODY_SIZE);
+			snake.draw(g);
 			}
 		};
 
-		panel.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+		Dimension dimension = new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT);
+		panel.setPreferredSize(dimension);
 		window.add(panel);
-
 		timer = new Timer(0, this);
-
 		window.pack();
 		window.addKeyListener(this);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,13 +80,13 @@ public class SnakeGame implements ActionListener, KeyListener {
 
 	public void startGame() {
 		String instructions = "Collect food to grow your snake.\nThe game is "
-				+ "over if you run into your tail or the edge of the window." + "\nClick OK to begin!";
+				+ "over if you run into your tail or the edge of the window."
+				+ "\nClick OK to begin!";
 
 		JOptionPane.showMessageDialog(null, instructions);
 
 		// Note: Adjust delay here if you want snake to go slower or faster.
 		snake.resetLocation();
-//		randomizeFoodLocation();
 		timer.setDelay(250);
 		timer.start();
 	}
@@ -107,7 +105,6 @@ public class SnakeGame implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-
 		/*
 		 * Use a switch statement to determine if an arrow key is pressed, and set the
 		 * snake's direction accordingly.
@@ -117,7 +114,6 @@ public class SnakeGame implements ActionListener, KeyListener {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
 			snake.setDirection(Direction.UP);
-			System.out.println();
 			break;
 		case KeyEvent.VK_DOWN:
 			snake.setDirection(Direction.DOWN);
@@ -134,7 +130,6 @@ public class SnakeGame implements ActionListener, KeyListener {
 	}
 
 	private void randomizeFoodLocation() {
-
 		/*
 		 * Create a new Location object that is set to a random x and y values between 0
 		 * and the WIDTH and HEIGHT variables respectively.
@@ -153,11 +148,10 @@ public class SnakeGame implements ActionListener, KeyListener {
 		if (!snake.isLocationOnSnake(newLocation)) {
 			foodLocation = newLocation;
 		}
-		//System.out.println(foodLocation.getX() + " + " + foodLocation.getY());
+		// System.out.println(foodLocation.getX() + " + " + foodLocation.getY());
 	}
 
 	private void gameOver() {
-
 		// Stop the timer.
 		timer.stop();
 		// Tell the user their snake is dead.
@@ -174,14 +168,12 @@ public class SnakeGame implements ActionListener, KeyListener {
 			timer.restart();
 			startGame();
 		} else {
-			JOptionPane.showMessageDialog(panel, "TBD exit the game");
 			System.exit(0);
 		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
 		// Call the snake's update method.
 		snake.update();
 		/*
@@ -189,7 +181,6 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * gameOver method.
 		 */
 		if (snake.isHeadCollidingWithBody() || snake.isOutOfBounds()) {
-			//System.out.println("ending game");
 			gameOver();
 		}
 
@@ -198,9 +189,10 @@ public class SnakeGame implements ActionListener, KeyListener {
 		 * feed the snake and randomize the food location.
 		 */
 		Location headLocation = snake.getHeadLocation();
-		//System.out.println("head Location X = " + headLocation.getX() + "head Location Y = " + headLocation.getY());
+		// System.out.println("head Location X = " + headLocation.getX() + "head
+		// Location Y = " + headLocation.getY());
 		if (headLocation.getX() == foodLocation.getX() && headLocation.getY() == foodLocation.getY()) {
-			//System.out.println("got food");
+			// System.out.println("got food");
 			snake.feed();
 			randomizeFoodLocation();
 		}

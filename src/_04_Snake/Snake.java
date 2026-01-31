@@ -8,14 +8,10 @@ import java.util.Iterator;
 public class Snake {
 	public static final Color SNAKE_COLOR = Color.BLUE;
 	public static final int BODY_SIZE = 50;
-
 	private SnakeSegment head;
 	private ArrayList<SnakeSegment> snake;
-
 	private Direction currentDirection;
-
 	private boolean canMove = true;
-
 	public Snake(Location location) {
 		snake = new ArrayList<SnakeSegment>();
 		head = new SnakeSegment(location, BODY_SIZE);
@@ -24,25 +20,24 @@ public class Snake {
 	}
 
 	public void feed() {
-		//For next time: Segment 0 and 1 initially are different locations, but then after are the same x and y
-		System.out.println("feed");
-		SnakeSegment currentTailSegment = snake.get(snake.size()-1);
+		// For next time: Segment 0 and 1 initially are different locations, but then
+		// after are the same x and y
+		SnakeSegment currentTailSegment = snake.get(snake.size() - 1);
 		Location currentTailSegmentLoc = currentTailSegment.getLocation();
 		Location newTailLoc = null;
+		int y = currentTailSegmentLoc.getY();
+		int x = currentTailSegmentLoc.getX();
 		if (currentDirection == Direction.RIGHT) {
-			newTailLoc = new Location(currentTailSegmentLoc.getX()-1, currentTailSegmentLoc.getY());	
+			newTailLoc = new Location(x - 1, y);
 		} else if (currentDirection == Direction.LEFT) {
-			newTailLoc = new Location(currentTailSegmentLoc.getX()+1, currentTailSegmentLoc.getY());	
+			newTailLoc = new Location(x + 1, y);
 		} else if (currentDirection == Direction.UP) {
-			newTailLoc = new Location(currentTailSegmentLoc.getX(), currentTailSegmentLoc.getY()-1);	
+			newTailLoc = new Location(x, y - 1);
 		} else if (currentDirection == Direction.DOWN) {
-			newTailLoc = new Location(currentTailSegmentLoc.getX(), currentTailSegmentLoc.getY()+1);	
+			newTailLoc = new Location(x, y + 1);
 		}
-		System.out.println("head " + head.getLocation().getX() + "," + head.getLocation().getY());
-		System.out.println("tail " + newTailLoc.getX() + "," +  newTailLoc.getY());
 		SnakeSegment newTailSegment = new SnakeSegment(newTailLoc, BODY_SIZE);
 		snake.add(newTailSegment);
-		System.out.println("snakeSize " + snake.size());
 	}
 
 	public Location getHeadLocation() {
@@ -50,7 +45,6 @@ public class Snake {
 	}
 
 	public void update() {
-
 		/*
 		 * Create variables for the next X and Y location of the snake's head.
 		 * Initialize them to the current X and Y locations.
@@ -83,11 +77,11 @@ public class Snake {
 		 * Location of the segment in front of it.
 		 * 
 		 * Use a loop starting at the end of the ArrayList and stop before the head of
-		 * the snake (index 0) or you will go out of bounds.
+		 * the snake (index 0) or you will go out of bounds. PROB HERE
 		 */
-		for (int i = snake.size() -1; i > 0; i--) {
+		for (int i = snake.size() - 1; i > 0; i--) {
 			SnakeSegment curSnakeSegment = snake.get(i);
-			SnakeSegment prevSnakeSegment = snake.get(i-1);
+			SnakeSegment prevSnakeSegment = snake.get(i - 1);
 			Location prevLocation = prevSnakeSegment.getLocation();
 			Location curLocation = curSnakeSegment.getLocation();
 			curLocation.setX(prevLocation.getX());
@@ -104,7 +98,6 @@ public class Snake {
 	}
 
 	public void setDirection(Direction direction) {
-
 		/*
 		 * If the passed in direction is not the opposite direction of currentDirection
 		 * and canMove is true, set currentDirection to the passed in direction and
@@ -119,7 +112,6 @@ public class Snake {
 	}
 
 	private boolean isNotOppositeDirection(Direction direction) {
-
 		/*
 		 * Complete the method so it returns true if the passed in direction is not the
 		 * opposite direction of currentDirection.
@@ -142,7 +134,6 @@ public class Snake {
 	}
 
 	public void resetLocation() {
-
 		// Clear the snake.
 		snake.clear();
 		/*
@@ -168,30 +159,27 @@ public class Snake {
 		 */
 		int headX = head.getLocation().getX();
 		int headY = head.getLocation().getY();
-		if (headX < 0 && headX >= SnakeGame.WINDOW_WIDTH) {
-			System.out.println("headX " + headX + " is out of bounds");
+		if (headX < 0 || headX >= SnakeGame.WINDOW_WIDTH / BODY_SIZE) {
 			return true;
 		}
-		if (headY < 0 && headY >= SnakeGame.WINDOW_HEIGHT) {
-			System.out.println("headY " + headY + " is out of bounds");
+		if (headY < 0 || headY >= SnakeGame.WINDOW_HEIGHT / BODY_SIZE) {
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 	public boolean isHeadCollidingWithBody() {
-
 		/*
 		 * Complete the method so it returns true if the head is located in the same
 		 * location as any other body segment.
 		 */
-		for (int i = 0; i > snake.size(); i++) {
+		int headX = head.getLocation().getX();
+		int headY = head.getLocation().getY();
+		for (int i = 1; i < snake.size(); i++) {
 			int segmentX = snake.get(i).getLocation().getX();
-			int headX = getHeadLocation().getX();
 			int segmentY = snake.get(i).getLocation().getY();
-			int headY = getHeadLocation().getY();
-			if (segmentX == headX && segmentY == headY) {
-				System.out.println("segX " + segmentX + "segY " + segmentY + "headX " + headX + "headY " + headY);
+			if (headX == segmentX && headY == segmentY) {
 				return true;
 			}
 		}
@@ -199,7 +187,6 @@ public class Snake {
 	}
 
 	public boolean isLocationOnSnake(Location loc) {
-
 		/*
 		 * Complete the method so it returns true if the passed in location is located
 		 * on the snake.
@@ -215,7 +202,6 @@ public class Snake {
 	public void draw(Graphics g) {
 		for (int i = 0; i < snake.size(); i++) {
 			SnakeSegment s = snake.get(i);
-			System.out.println("segment number: " + i + ", X = " + s.getLocation().getX() + " Y = " + s.getLocation().getY());
 			s.draw(g);
 		}
 	}
